@@ -20,16 +20,16 @@ struct AddEntryView: View {
         NavigationView {
             List {
                 ForEach(entryData) { _ in
-                        AddEntrySectionView(viewModel: viewModel)
-                        Button(action: {
-                            print("Tapped")
-                        }, label: {
-                            Text("Add")
-                                .foregroundColor(.white)
-                        })
-                        .frame(width: 120, height: 44, alignment: .center)
-                        .background(Color.blue)
-                        .clipShape(RoundedRectangle(cornerRadius: 12.0))
+                    AddEntrySectionView(viewModel: viewModel)
+                    Button(action: {
+                        print("Tapped")
+                    }, label: {
+                        Text("Add")
+                            .foregroundColor(.white)
+                    })
+                    .frame(width: 120, height: 44, alignment: .center)
+                    .background(Color.blue)
+                    .clipShape(RoundedRectangle(cornerRadius: 12.0))
                 }
             }
             .listStyle(GroupedListStyle())
@@ -65,40 +65,40 @@ struct AddEntrySectionView: View {
     }()
     
     var body: some View {
-            VStack(spacing: 16) {
-                HStack {
-                    Text("Date")
-                    Spacer()
-                    DatePicker(selection: $viewModel.selectedDate, in: ...Date(), displayedComponents: .date) {
-                        Text("")
-                    }
-                }
-                
-                HStack(alignment: .center, spacing: 24) {
-                    Text("Title")
-                    Spacer()
-                    TextField("Enter Description", text: $viewModel.entryDescription)
-                        .multilineTextAlignment(.trailing)
-                }
-                
-                HStack {
-                    Text("Amount")
-                    Spacer()
-                    TextField("Enter cost", text: $viewModel.cost)
-                        .multilineTextAlignment(.trailing)
-                }
-                
-                HStack {
-                    Text("Category")
-                    Picker("", selection: $viewModel.selectedCategory) {
-                        ForEach(viewModel.categories, id: \.self) {
-                            Text($0)
-                        }
-                    }
-                    .pickerStyle(DefaultPickerStyle())
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Text("Date")
+                Spacer()
+                DatePicker(selection: $viewModel.selectedDate, in: ...Date(), displayedComponents: .date) {
+                    Text("")
                 }
             }
+            
+            HStack(alignment: .center, spacing: 24) {
+                Text("Title")
+                Spacer()
+                TextField("Enter Description", text: $viewModel.entryDescription)
+                    .multilineTextAlignment(.trailing)
+            }
+            
+            HStack {
+                Text("Amount")
+                Spacer()
+                TextField("Enter cost", text: $viewModel.cost)
+                    .multilineTextAlignment(.trailing)
+            }
+            
+            HStack {
+                Text("Category")
+                Picker("", selection: $viewModel.selectedCategory) {
+                    ForEach(viewModel.categories, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(DefaultPickerStyle())
+            }
         }
+    }
 }
 
 struct AddEntryView_Previews: PreviewProvider {
@@ -113,7 +113,7 @@ class ViewModel: ObservableObject {
     
     @Published var cost: String = ""
     
-    @Published var selectedCategory = ""
+    @Published var selectedCategory = "Personal"
     
     @Published var selectedDate = Date()
     
