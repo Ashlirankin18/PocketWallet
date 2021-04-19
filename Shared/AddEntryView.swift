@@ -67,6 +67,16 @@ struct AddEntrySectionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
+                Text("Category")
+                Picker("", selection: $viewModel.selectedCategory) {
+                    ForEach(viewModel.categories, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(DefaultPickerStyle())
+            }
+            
+            HStack {
                 Text("Date")
                 Spacer()
                 DatePicker(selection: $viewModel.selectedDate, in: ...Date(), displayedComponents: .date) {
@@ -86,16 +96,7 @@ struct AddEntrySectionView: View {
                 Spacer()
                 TextField("Enter cost", text: $viewModel.cost)
                     .multilineTextAlignment(.trailing)
-            }
-            
-            HStack {
-                Text("Category")
-                Picker("", selection: $viewModel.selectedCategory) {
-                    ForEach(viewModel.categories, id: \.self) {
-                        Text($0)
-                    }
-                }
-                .pickerStyle(DefaultPickerStyle())
+                    .keyboardType(.decimalPad)
             }
         }
     }
